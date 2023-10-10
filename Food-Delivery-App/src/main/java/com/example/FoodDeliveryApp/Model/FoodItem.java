@@ -40,7 +40,7 @@ public class FoodItem {
 
     @ManyToOne
     @JoinColumn
-    Restaurants restaurants;
+    Restaurant restaurant;
 
 
 }

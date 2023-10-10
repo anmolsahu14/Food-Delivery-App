@@ -44,5 +44,5 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn
-    Restaurants restaurants;
+    Restaurant restaurant;
 }
