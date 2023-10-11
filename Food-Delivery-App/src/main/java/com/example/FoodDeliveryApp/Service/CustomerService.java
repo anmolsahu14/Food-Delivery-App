@@ -37,7 +37,7 @@ public class CustomerService {
     public CustomerResponse findCustomerByMobile(String mobile) {
         Customer customer = customerRepository.findByMobileNo(mobile);
 
-        if(customer.equals(null)){
+        if(customer == null){
             throw new CustomerNotFoundException("Invalid mobile Number!!!!");
         }
         return CustomerTransformer.CustomerToCustomerResponse(customer);

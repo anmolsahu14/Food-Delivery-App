@@ -8,11 +8,13 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Builder
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="food_item")
 public class FoodItem {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,7 @@ public class FoodItem {
 
     boolean veg;
 
+    @Getter
     boolean available;
 
     @ManyToOne
@@ -40,7 +43,7 @@ public class FoodItem {
 
     @ManyToOne
     @JoinColumn
-    Restaurant restaurant;
+    Restaurant restaurants;
 
 
 }
