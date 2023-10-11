@@ -27,7 +27,7 @@ public class CustomerService {
                 .customer(customer)
                 .build();
 
-        Customer.setCart(cart);
+        customer.setCart(cart);
 
         Customer savedCustomer = customerRepository.save(customer);
 
@@ -35,10 +35,10 @@ public class CustomerService {
     }
 
     public CustomerResponse findCustomerByMobile(String mobile) {
-        Customer customer = customerRepository.findByMobile(mobile);
+        Customer customer = customerRepository.findByMobileNo(mobile);
 
         if(customer.equals(null)){
-            throw new CustomerNotFoundException("Invalid mobile no!!!!");
+            throw new CustomerNotFoundException("Invalid mobile Number!!!!");
         }
         return CustomerTransformer.CustomerToCustomerResponse(customer);
     }
