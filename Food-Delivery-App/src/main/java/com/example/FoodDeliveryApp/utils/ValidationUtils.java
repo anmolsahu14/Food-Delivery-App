@@ -20,6 +20,6 @@ public class ValidationUtils {
 
     public boolean validateRestaurantId(int id){
         Optional<Restaurant> restaurantOptional = restaurantRepository.findById(id);
-        return (restaurantOptional.isEmpty());
+        return restaurantOptional.isPresent();
     }
 }

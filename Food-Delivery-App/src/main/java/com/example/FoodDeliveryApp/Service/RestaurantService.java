@@ -17,15 +17,15 @@ import java.util.Optional;
 
 @Service
 public class RestaurantService {
+
+     final RestaurantRepository restaurantRepository;
+     final ValidationUtils validationUtils;
+
     @Autowired
-     RestaurantRepository restaurantRepository;
-     ValidationUtils validationUtils = new ValidationUtils();
-
-
-//    public RestaurantService(RestaurantRepository restaurantRepository, ValidationUtils validationUtils) {
-//        this.restaurantRepository = restaurantRepository;
-//        this.validationUtils = validationUtils;
-//    }
+    public RestaurantService(RestaurantRepository restaurantRepository, ValidationUtils validationUtils) {
+        this.restaurantRepository = restaurantRepository;
+        this.validationUtils = validationUtils;
+    }
 
     public RestaurantResponse addRestaurant(RestaurantRequest restaurantRequest) {
 
@@ -72,22 +72,17 @@ public class RestaurantService {
             throw new RestaurantNotFoundException("Restaurant does not exist!!!!");
         }
 
-
-
         Restaurant restaurant = restaurantRepository.findById(foodRequest.getRestaurantId()).get();
 
         FoodItem foodItem = FoodItemTransformer.FoodRequestToFoodItem(foodRequest);
 
-       // foodItem.setRestaurants(restaurant);
+        foodItem.setRestaurants(restaurant);
 
         restaurant.getAvailableFoodItems().add(foodItem);
 
-      //  Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+        Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 
-
-         restaurant = restaurantRepository.save(restaurant);
-        return RestaurantTransformer.RestaurantToRestaurantResponse(restaurant);
-
+        return RestaurantTransformer.RestaurantToRestaurantResponse(savedRestaurant);
 
     }
 }
