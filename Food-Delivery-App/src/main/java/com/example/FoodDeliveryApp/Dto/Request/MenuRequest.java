@@ -1,5 +1,6 @@
 package com.example.FoodDeliveryApp.Dto.Request;
 
+import com.example.FoodDeliveryApp.Enum.FoodCategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,12 +10,19 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodRequest {
+public class MenuRequest {
 
-    int requiredQuantity;
+    int restaurantId;
 
-    String customerMobile;
+    String dishName;
 
-    int menuItemId;
+    double price;
+
+    FoodCategory category;
+
+    boolean veg;
+
+    boolean available;
+
 
 }

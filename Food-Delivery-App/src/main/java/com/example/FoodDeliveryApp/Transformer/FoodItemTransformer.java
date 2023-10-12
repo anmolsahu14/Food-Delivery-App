@@ -1,24 +1,24 @@
 package com.example.FoodDeliveryApp.Transformer;
 
-import com.example.FoodDeliveryApp.Dto.Request.FoodRequest;
-import com.example.FoodDeliveryApp.Dto.Response.FoodResponse;
-import com.example.FoodDeliveryApp.Model.FoodItem;
+import com.example.FoodDeliveryApp.Dto.Request.MenuRequest;
+import com.example.FoodDeliveryApp.Dto.Response.MenuResponse;
+import com.example.FoodDeliveryApp.Model.MenuItem;
 
 public class FoodItemTransformer {
 
-    public static FoodItem FoodRequestToFoodItem(FoodRequest foodRequest){
-        return FoodItem.builder()
-                .dishName(foodRequest.getDishName())
-                .price(foodRequest.getPrice())
-                .category(foodRequest.getCategory())
-                .veg(foodRequest.isVeg())
-                .available(foodRequest.isAvailable())
+    public static MenuItem FoodRequestToFoodItem(MenuRequest menuRequest){
+        return MenuItem.builder()
+                .dishName(menuRequest.getDishName())
+                .price(menuRequest.getPrice())
+                .category(menuRequest.getCategory())
+                .veg(menuRequest.isVeg())
+                .available(menuRequest.isAvailable())
                 .build();
     }
 
-    public static FoodResponse FoodItemToFoodResponse(FoodItem fooditem){
+    public static MenuResponse FoodItemToFoodResponse(MenuItem fooditem){
 
-        return FoodResponse.builder()
+        return MenuResponse.builder()
                 .dishName(fooditem.getDishName())
                 .price(fooditem.getPrice())
                 .veg(fooditem.isVeg())

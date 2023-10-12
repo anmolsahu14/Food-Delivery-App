@@ -1,9 +1,9 @@
 package com.example.FoodDeliveryApp.Service;
 
-import com.example.FoodDeliveryApp.Dto.Request.FoodRequest;
+import com.example.FoodDeliveryApp.Dto.Request.MenuRequest;
 import com.example.FoodDeliveryApp.Dto.Request.RestaurantRequest;
 import com.example.FoodDeliveryApp.Dto.Response.RestaurantResponse;
-import com.example.FoodDeliveryApp.Model.FoodItem;
+import com.example.FoodDeliveryApp.Model.MenuItem;
 import com.example.FoodDeliveryApp.Model.Restaurant;
 import com.example.FoodDeliveryApp.Repositary.RestaurantRepository;
 import com.example.FoodDeliveryApp.Transformer.FoodItemTransformer;
@@ -12,8 +12,6 @@ import com.example.FoodDeliveryApp.exceptions.RestaurantNotFoundException;
 import com.example.FoodDeliveryApp.utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class RestaurantService {
@@ -59,7 +57,7 @@ public class RestaurantService {
         return "Restaurant is closed!!!";
     }
 
-    public RestaurantResponse addFoodItemToRestaurant(FoodRequest foodRequest) {
+    public RestaurantResponse addMenuItemToRestaurant(MenuRequest menuRequest) {
 
 //        Optional<Restaurant> restaurantOptional = restaurantRepository.findById(foodRequest.getRestaurantId());
 //
@@ -67,18 +65,18 @@ public class RestaurantService {
 //            throw new RestaurantNotFoundException("Restaurant does not Exist!!!!");
 //        }
 
-        if(!validationUtils.validateRestaurantId(foodRequest.getRestaurantId())){
+        if(!validationUtils.validateRestaurantId(menuRequest.getRestaurantId())){
 
             throw new RestaurantNotFoundException("Restaurant does not exist!!!!");
         }
 
-        Restaurant restaurant = restaurantRepository.findById(foodRequest.getRestaurantId()).get();
+        Restaurant restaurant = restaurantRepository.findById(menuRequest.getRestaurantId()).get();
 
-        FoodItem foodItem = FoodItemTransformer.FoodRequestToFoodItem(foodRequest);
+        MenuItem menuItem = FoodItemTransformer.FoodRequestToFoodItem(menuRequest);
 
-        foodItem.setRestaurants(restaurant);
+        menuItem.setRestaurants(restaurant);
 
-        restaurant.getAvailableFoodItems().add(foodItem);
+        restaurant.getAvailableMenuItems().add(menuItem);
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 

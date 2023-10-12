@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class CartResponse {
 
-    int cartTotal;
+    double cartTotal;
 
-    List<FoodResponse> foodItems;
+    List<MenuResponse> foodItems;
 
 }

@@ -18,4 +18,8 @@ public class FoodResponse {
     FoodCategory category;
 
     boolean veg;
+
+    int quantityAdded;
+
+
 }

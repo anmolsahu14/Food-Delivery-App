@@ -1,6 +1,6 @@
 package com.example.FoodDeliveryApp.Controller;
 
-import com.example.FoodDeliveryApp.Dto.Request.FoodRequest;
+import com.example.FoodDeliveryApp.Dto.Request.MenuRequest;
 import com.example.FoodDeliveryApp.Dto.Request.RestaurantRequest;
 import com.example.FoodDeliveryApp.Dto.Response.RestaurantResponse;
 import com.example.FoodDeliveryApp.Service.CustomerService;
@@ -39,9 +39,9 @@ public class RestaurantController {
     }
 
     @PostMapping("/add/food")
-    public ResponseEntity addFoodItemToRestaurant(@RequestBody  FoodRequest foodRequest){
+    public ResponseEntity addMenuItemToRestaurant(@RequestBody MenuRequest menuRequest){
 
-        RestaurantResponse restaurantResponse = restaurantService.addFoodItemToRestaurant(foodRequest);
+        RestaurantResponse restaurantResponse = restaurantService.addMenuItemToRestaurant(menuRequest);
         return new ResponseEntity(restaurantResponse,HttpStatus.CREATED);
 
     }
