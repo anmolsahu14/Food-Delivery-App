@@ -18,14 +18,13 @@ import java.util.List;
 @Table(name="order_entity")
 public class OrderEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String orderId;
 
-    int orderTotal;
+    double orderTotal;
 
     @CreationTimestamp
     Date orderTime;
@@ -45,4 +44,6 @@ public class OrderEntity {
 
     @OneToMany(mappedBy =  "order",cascade = CascadeType.ALL)
     List<FoodItem> foodItems = new ArrayList<>();
+
+
 }

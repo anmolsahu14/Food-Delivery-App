@@ -1,5 +1,6 @@
 package com.example.FoodDeliveryApp.Model;
 
+import com.example.FoodDeliveryApp.Enum.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -27,6 +28,8 @@ public class DeliveryPartner {
     @Size(min = 10,max = 10)
     String mobileNo;
 
+    @Enumerated(EnumType.STRING)
+    Gender gender;
 
     @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
     List<OrderEntity> orders =  new ArrayList<>();
