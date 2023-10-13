@@ -63,19 +63,34 @@ public class CartService {
         if (!menuItem.isAvailable()) {
             throw new MenuItemNotFoundException("Given dish is out of stock for now!!!");
         }
-
-
-        FoodItem foodItem = FoodItem.builder()
-                .menuItem(menuItem)
-                .cart(customer.getCart())
-                .requiredQuantity(foodRequest.getRequiredQuantity())
-                .totalCost(foodRequest.getRequiredQuantity() * menuItem.getPrice())
-                .build();
-
         Cart cart = customer.getCart();
-        FoodItem savedFoodItem = foodRepo.save(foodItem);
 
+        boolean alreadyExists = false;
 
+        FoodItem savedFoodItem = new FoodItem();
+
+        if(cart.getFoodItems().size() != 0){
+            for(FoodItem foodItem : cart.getFoodItems()){
+                if(foodItem.getMenuItem().getId() == menuItem.getId()){
+                    savedFoodItem = foodItem;
+                    int curr = foodItem.getRequiredQuantity();
+                    foodItem.setRequiredQuantity(curr + foodRequest.getRequiredQuantity());
+                    alreadyExists = true;
+                    break;
+                }
+            }
+        }
+
+        if(!alreadyExists) {
+            FoodItem foodItem = FoodItem.builder()
+                    .menuItem(menuItem)
+                    .cart(customer.getCart())
+                    .requiredQuantity(foodRequest.getRequiredQuantity())
+                    .totalCost(foodRequest.getRequiredQuantity() * menuItem.getPrice())
+                    .build();
+             savedFoodItem = foodRepo.save(foodItem);
+
+        }
         double cartTotal = 0;
         cart.getFoodItems().add(savedFoodItem);
         for(FoodItem food:cart.getFoodItems()){
