@@ -11,7 +11,6 @@ public interface DeliveryPartnerRepo extends JpaRepository<DeliveryPartner,Integ
 
     String findRandomPartner = "select p from DeliveryPartner p order by RAND() LIMIT 1";
 
-    @Query(valve = findRandomPartner)
-
+    @Query(value = findRandomPartner)
     DeliveryPartner findRandomDeliveryPartner();
 }

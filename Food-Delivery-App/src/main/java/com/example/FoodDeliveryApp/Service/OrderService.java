@@ -48,12 +48,13 @@ public class OrderService {
 
         OrderEntity order = OrderTransformer.prepareOrderEntity(cart);
 
+        OrderEntity savedOrder = orderEntityRepo.save(order);
+
         order.setCustomer(customer);
         order.setDeliveryPartner(partner);
         order.setRestaurants(restaurant);
         order.setFoodItems(cart.getFoodItems());
 
-        OrderEntity savedOrder = orderEntityRepo.save(order);
 
         customer.getOrders().add(savedOrder);
         partner.getOrders().add(savedOrder);

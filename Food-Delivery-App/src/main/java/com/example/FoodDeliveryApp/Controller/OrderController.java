@@ -3,6 +3,8 @@ package com.example.FoodDeliveryApp.Controller;
 import com.example.FoodDeliveryApp.Dto.Response.OrderResponse;
 import com.example.FoodDeliveryApp.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,16 @@ public class OrderController {
     }
 
     @PostMapping("/place/mobile/{mobile}")
-    public OrderResponse placeOrder(@PathVariable("mobile") String customerMobile){
+    public ResponseEntity  placeOrder(@PathVariable("mobile") String customerMobile){
 
-        OrderResponse orderResponse = orderService.placeOrder(customerMobile);
+
+        try {
+            OrderResponse orderResponse = orderService.placeOrder(customerMobile);
+            return new ResponseEntity(orderResponse,HttpStatus.CREATED);
+        }
+        catch(Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
 
 
